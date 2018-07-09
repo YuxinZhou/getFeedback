@@ -1,3 +1,5 @@
+
+
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
@@ -6,6 +8,15 @@ const Survey = mongoose.model('surveys');
 const SurveyTemplate = require('../services/mailTemplate/surveyTemplate');
 
 module.exports = app => {
+  app.get('/api/surveys/thanks', (req, res) => {
+    res.send('Thank you for your answer!')
+  });
+
+  app.post('/api/surveys/webhooks', (req, res) => {
+    console.log(req.body);
+    res.send({});
+  });
+
   app.post('/api/surveys', requireLogin, requireCredits,
     (req, res) => {
       const {title, subject, body, recipients} = req.body;

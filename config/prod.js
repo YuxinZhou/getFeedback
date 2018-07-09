@@ -5,5 +5,6 @@ module.exports = {
   cookieKey: process.env.COOKIE_KEY,
   stripePublicKey: process.env.STRIPE_PUB_KEY,
   stripeSecretKey: process.env.STRIPE_SECRET_KEY,
-  sendgridKey: process.env.SENDGRID_KEY
+  sendgridKey: process.env.SENDGRID_KEY,
+  redirectDomain: process.env.DOMAIN
 };

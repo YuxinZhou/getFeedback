@@ -1,6 +1,6 @@
 // make ajax call
 import axios from 'axios';
-import { FETCH_USER } from "./types";
+import {FETCH_USER} from "./types";
 
 export const fetchUser = () => {
   // Redux thunk will automatically call this function with dispatch argument
@@ -20,5 +20,18 @@ export const HandleToken = (token) => {
         type: FETCH_USER,
         payload: res.data
       }));
+  };
+};
+
+export const submitSurvey = (values, history) => {
+  // return { type: 'submitsurvey'};
+  return function (dispatch) {
+    axios.post('/api/surveys', values)
+      .then(res =>
+        dispatch({
+          type: FETCH_USER, // update locate user data
+          payload: res.data
+        }));
+        history.push('/surveys');
   };
 };
