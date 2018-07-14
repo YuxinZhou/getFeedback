@@ -1,4 +1,6 @@
-
+const _ = require('lodash');
+const Path = require('path-parser').default;
+const {URL} = require('url');
 
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
@@ -8,13 +10,48 @@ const Survey = mongoose.model('surveys');
 const SurveyTemplate = require('../services/mailTemplate/surveyTemplate');
 
 module.exports = app => {
-  app.get('/api/surveys/thanks', (req, res) => {
+  app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thank you for your answer!')
   });
 
+  app.get('/api/surveys', requireLogin, (req, res) => {
+    Survey.find({ _user:req.user.id })
+      .select( {recipients: false} )
+      .then(surveys => res.send(surveys));
+  });
+
   app.post('/api/surveys/webhooks', (req, res) => {
-    console.log(req.body);
-    res.send({});
+    const p = new Path('/api/surveys/:surveyId/:choice');
+
+    _.chain(req.body)
+      .map((event) => {
+        // extract pathname from url
+        const pathname = new URL(event.url).pathname;
+        // console.log(p.test(pathname));
+        //  { surveyId: '5b43039566d7f28a8488319c', choice: 'yes' }
+        const match = p.test(pathname);
+        if (match) {
+          return {
+            email: event.email,
+            surveyId: match.surveyId,
+            choice: match.choice
+          };
+        }
+      })
+      .compact()
+      .uniqBy('email', 'surveyId')
+      .each(({surveyId, email, choice}) => {
+        Survey.updateOne({
+          _id: surveyId,
+          recipients: {
+            $elemMatch: {email: email, responded: false}
+          }
+        }, {
+          $inc: {[choice]: 1},
+          $set: { 'recipients.$.responded': true },
+          lastResponse: new Date()
+        }).exec();
+      });
   });
 
   app.post('/api/surveys', requireLogin, requireCredits,
