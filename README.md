@@ -70,10 +70,10 @@ You should see a logging info like below, and you can see a frontend React app a
 
 To receive a WebHook request from localhost, we use localtunnel to create a unique publicly accessible url (e.g. https://dakkdoekdpf.localtunnel.me) that will proxy all requests to your locally running webserver. And you need to set the SendGrid ballback URL to be this localtunnel URI. To do so, you need to
 
-    1. Go to https://app.sendgrid.com/settings/mail_settings 
-    2. In `Event Notification`, set `HTTP POST URL` to be https://dakkdoekdpf.localtunnel.me/api/surveys/webhooks . 
-    3. Check the `Clicked` in `SELECT ACTIONS` column 
-    4. Save your changes.
+      1) Go to https://app.sendgrid.com/settings/mail_settings 
+      2) In `Event Notification`, set `HTTP POST URL` to be https://dakkdoekdpf.localtunnel.me/api/surveys/webhooks . 
+      3) Check the `Clicked` in `SELECT ACTIONS` column 
+      4) Save your changes.
 
 
 
