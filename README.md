@@ -29,7 +29,7 @@ npm install
 ```
 3. Create your API key file. 
 In `getFeedback/config`, create a `dev.js` file which should include all your private API keys, using the template:
-```
+```js
 module.exports = {
   googleClientID: 'your-google-client-id',
   googleClientSecret: 'your-google-client-id',
