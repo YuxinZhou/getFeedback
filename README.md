@@ -46,7 +46,7 @@ module.exports = {
 cd $HOME/getFeedback
 npm run dev
 ```
-You should see a logging info as follow, and you can see a frontend React app at http://localhost:3000/
+You should see a logging info like below, and you can see a frontend React app at http://localhost:3000/
 ```
 [0] > server@1.0.0 server ~/getFeedback
 [0] > nodemon server.js
