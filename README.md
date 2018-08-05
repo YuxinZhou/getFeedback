@@ -5,6 +5,7 @@ A NodeJs &amp; ReactJS &amp; MongoDB Application
 This is a full-stack web application project using NodeJs as backend, ReactJS as frontend and MongoDB for data storage.
 
 The app that can be used to send mass emails to a big list of clients for the purpose of collecting feedback.  It allows users to 
+
 * Login with a google account.
 * Add credits to the account.
 * Create a survey with a customized question.
@@ -17,10 +18,13 @@ A live example is available at https://lower-worms-65775.herokuapp.com/
 
 To run the code in developemnt mode on a local machine, follow the steps below:
 1. Clone the repo
+
 ```
 git clone https://github.com/YuxinZhou/getFeedback.git
 ```
+
 2. Install the dependency for both server side and client side. (Suppose `getFeedback` folder is under the `$HOME` directory)
+
 ```
 cd $HOME/getFeedback
 npm install
@@ -28,6 +32,7 @@ cd $HOME/getFeedback/clinet
 npm install
 ```
 3. Create your API key file. 
+
 In `getFeedback/config`, create a `dev.js` file which should include all your private API keys, using the template:
 ```js
 module.exports = {
@@ -41,7 +46,9 @@ module.exports = {
   redirectDomain: 'http://localhost:3000/' 
 };
 ```
+
 4. Run 
+
 ```
 cd $HOME/getFeedback
 npm run dev
